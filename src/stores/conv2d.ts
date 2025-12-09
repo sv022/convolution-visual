@@ -6,6 +6,7 @@ import convolve from '@/utils/convolve'
 import getRandomKernel from '@/utils/randomKernel'
 import getKernel from '@/utils/exampleKernels'
 import type { Kernels } from '@/types/kernels'
+import correlate from '@/utils/correlate'
 
 export const useconv2dStore = defineStore('conv2d', () => {
   const input = ref<Image>({
@@ -14,6 +15,8 @@ export const useconv2dStore = defineStore('conv2d', () => {
     height: 8,
   })
   const kernel = ref<Image>(getRandomKernel(3))
+
+  const operation = ref<'convolution' | 'correlation'>('correlation')
 
   const padding = ref<number>(0)
   const stride = ref<number>(1)
@@ -62,6 +65,10 @@ export const useconv2dStore = defineStore('conv2d', () => {
     kernel.value = getKernel(kernelType)
   }
 
+  const setOperation = (op: 'convolution' | 'correlation') => {
+    operation.value = op
+  }
+
   const resetKernel = () => {
     kernel.value = getRandomKernel(3)
     isKernelSelected.value = false
@@ -82,10 +89,13 @@ export const useconv2dStore = defineStore('conv2d', () => {
   resetInput()
 
   const output = computed(() => {
-    return convolve(input.value, kernel.value, padding.value, stride.value)
+    return operation.value === 'convolution'
+      ? convolve(input.value, kernel.value, padding.value, stride.value)
+      : correlate(input.value, kernel.value, padding.value, stride.value)
   })
 
   return {
+    operation,
     kernel,
     input,
     padding,
@@ -103,6 +113,7 @@ export const useconv2dStore = defineStore('conv2d', () => {
     incrementPadding,
     decrementPadding,
     setKernel,
+    setOperation,
     resetKernel,
     setImagePixel,
     setKernelPixel,
