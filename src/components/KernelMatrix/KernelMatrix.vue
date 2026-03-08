@@ -84,11 +84,16 @@
           :size="kernelPixelSize" />
       </div>
     </div>
-    <div class="flex flex-col items-center justify-center text-center">
+    <div class="flex flex-col items-center justify-center text-center space-y-2">
       <div class="font-bold text-2xl">=</div>
       <div class="flex size-15 items-center justify-center"
         :style="{ backgroundColor: outputPixelBGColor, color: outputPixelTextColor }">
         {{ outputPixelValue }}
+      </div>
+      <div>
+        <p class="text-xs font-semibold">
+          At ({{ visualsStore.highlightPixel[0] || '-' }}, {{ visualsStore.highlightPixel[1] || '-' }})
+        </p>
       </div>
     </div>
   </div>
