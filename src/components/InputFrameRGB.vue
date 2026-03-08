@@ -25,9 +25,8 @@
 </script>
 
 <template>
-  <div class="w-full space-y-10 md:flex md:h-[700px]">
+  <div class="w-full space-y-10 md:flex">
     <div class="flex flex-col space-y-4 flex-1/3 items-center justify-center">
-      <div class="h-[124px]"></div>
       <PixelsMatrixRGB />
       <div class="flex space-x-2">
         <Toggle variant="outline" :class="cn('!bg-transparent', modelR ? '!text-emerald-700' : '!text-rose-700')"

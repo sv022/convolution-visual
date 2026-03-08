@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <div class="w-full space-y-10 md:flex md:h-[700px]">
+  <div class="w-full space-y-10 md:flex">
     <div class="flex flex-1/3 items-center justify-center">
       <PixelsMatrix />
     </div>

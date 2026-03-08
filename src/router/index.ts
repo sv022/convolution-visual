@@ -10,24 +10,33 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta: { title: 'Convolution visual | Home' },
       component: HomeView,
     },
     {
       path: '/conv2d',
       name: 'Conv2d Visualization',
+      meta: { title: 'Convolution visual | GrayScale' },
       component: Conv2dView,
     },
     {
       path: '/convrgb',
       name: 'Conv2d RGB Visualization',
+      meta: { title: 'Convolution visual | RGB' },
       component: ConvRGBView,
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'Page not found',
+      meta: { title: 'Page not found' },
       component: PageNotFound,
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = (to.meta.title as string) || 'Convolution Visual'
+  next()
 })
 
 export default router
