@@ -2,26 +2,25 @@
   <img src="public/homepage_demo.png" alt="Project Name">
 </p>
 
-# NNLearn Tools
+# Convolution Visual
 
-NNLearn Tools is a collection of tools for learning various algorithms and methods used in Neural Networks.
-
-> [!WARNING]  
-> This project is still in development mode.
+A collection of tools for visualizing convolution operations.
 
 ## Getting Started
 
-**NNLearn Tools is avaliable at:** [https://nnlearn-tools.vercel.app](https://nn-learn-tools.vercel.app)
+**The website is avaliable at:** [https://convolution-visual.vercel.app](https://convolution-visual.vercel.app)
 
 ### Local Setup
 
 ```bash
-git clone https://github.com/sv022/NNLearn-Tools.git
-cd NNLearn-Tools
+git clone https://github.com/sv022/convolution-visual.git
+cd convolution-visual
 pnpm install
 pnpm run dev
 ```
 
 ## License
 
-[MIT](./LICENSE) License © 2025 [sv022](https://github.com/sv022)
+[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<br>
+© 2025 [sv022](https://github.com/sv022)
