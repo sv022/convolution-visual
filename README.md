@@ -21,6 +21,4 @@ pnpm run dev
 
 ## License
 
-[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-<br>
-© 2025 [sv022](https://github.com/sv022)
+[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) © 2025 [sv022](https://github.com/sv022)
