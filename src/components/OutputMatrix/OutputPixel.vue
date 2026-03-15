@@ -15,9 +15,9 @@
 <template>
 
   <div
-    :class="cn('flex justify-center items-center size-10 border text-[8px]', props.size, { 'border-red-500': props.highlight })"
-    :style="{ backgroundColor: grayscaleToHex(props.value), color: invertGrayscaleToHex(props.value) }">{{
-      props.value.toFixed(2) }}
+    :class="cn('flex justify-center items-center size-10 border text-[7px]', props.size, { 'border-red-500': props.highlight })"
+    :style="{ backgroundColor: grayscaleToHex(props.value), color: invertGrayscaleToHex(props.value) }">
+    {{ props.value ? props.value.toFixed(2) : '0' }}
   </div>
 
 </template>

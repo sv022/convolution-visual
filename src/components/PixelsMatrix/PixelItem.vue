@@ -69,9 +69,9 @@
     <HoverCard :open-delay="1500" :close-delay="1000">
       <HoverCardTrigger>
         <div
-          :class="cn('flex items-center justify-center size-5 text-[8px] border', props.size, { 'border-red-500': props.highlight })"
+          :class="cn('flex items-center justify-center size-5 text-[7px] border', props.size, { 'border-red-500': props.highlight })"
           :style="{ backgroundColor: grayscaleToHex(props.value), color: invertGrayscaleToHex(props.value) }">
-          {{ props.value.toFixed(2) }}
+          {{ props.value ? props.value.toFixed(2) : '0' }}
         </div>
       </HoverCardTrigger>
       <HoverCardContent>

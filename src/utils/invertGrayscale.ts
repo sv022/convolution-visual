@@ -1,5 +1,5 @@
 export default function invertGrayscaleToHex(grayscaleValue: number): string {
-  if (grayscaleValue < 0) return '#ffffff'
+  if (grayscaleValue < 0) return '#f0f0f0'
   if (grayscaleValue > 1) return '#000000'
 
   const invertedValue = 1 - grayscaleValue
