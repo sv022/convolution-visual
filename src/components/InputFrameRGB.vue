@@ -25,8 +25,8 @@
 </script>
 
 <template>
-  <div class="w-full space-y-10 md:flex">
-    <div class="flex flex-col space-y-4 flex-1/3 items-center justify-center">
+  <div class="w-full space-y-10 md:flex justify-center items-center md:h-[624px] md:min-w-[1260px]">
+    <div class="flex flex-col space-y-4 flex-1/3 items-center justify-center md:max-h-[512px]">
       <PixelsMatrixRGB />
       <div class="flex space-x-2">
         <Toggle variant="outline" :class="cn('!bg-transparent', modelR ? '!text-emerald-700' : '!text-rose-700')"
@@ -44,10 +44,10 @@
       </div>
 
     </div>
-    <div class=" flex flex-1/3 min-w-[200px] items-center justify-center">
+    <div class=" flex flex-1/3 min-w-[200px] items-center justify-center md:max-h-[512px]">
       <KernelMatrix />
     </div>
-    <div class="flex flex-col space-y-2 flex-1/3 items-center justify-center">
+    <div class="flex flex-col space-y-2 flex-1/3 items-center justify-center md:max-h-[512px]">
       <OutputMatrixRGB />
     </div>
   </div>

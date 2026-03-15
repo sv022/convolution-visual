@@ -51,7 +51,7 @@
 <template>
 
   <div class="flex flex-col items-center h-full w-full">
-    <div class="w-[440px]">
+    <div class="w-dvw md:w-[440px] p-2">
       <h3 class="text-3xl font-bold pb-3 text-center">Kernel Settings</h3>
       <NumberField class="p-2" id="size" :disabled="conv2dStore.isKernelSelected" :default-value="3" :min="1" :step="2"
         :max="7" :model-value="conv2dStore.kernel.height">
