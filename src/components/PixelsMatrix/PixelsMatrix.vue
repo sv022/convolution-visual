@@ -71,7 +71,7 @@
         :pos-x="i" :pos-y="j" />
       <!-- <PixelItem v-for="j in props.item.width + props.padding * 2" v-bind:key="j * i" :value="Math.random()" /> -->
     </div>
-    <div class="w-full mt-2">
+    <div class="w-full mt-1">
       <p class="font-semibold text-xs text-center">{{ width }}x{{ height }}</p>
     </div>
   </div>

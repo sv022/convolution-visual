@@ -39,8 +39,9 @@
           :highlight="checkHighlightPixel(i, j)" @click="getHighlightFrame(i, j)" />
       </div>
     </div>
-    <div class="w-full mt-2">
-      <p class="font-semibold text-xs text-center">{{ conv2dstore.output.width }}x{{ conv2dstore.output.height }}</p>
+    <div class="w-full mt-1">
+      <p class="font-semibold text-xs text-center">{{ conv2dstore.output.width }}x{{
+        conv2dstore.output.height }}</p>
     </div>
   </div>
 </template>
