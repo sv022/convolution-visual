@@ -60,8 +60,6 @@ const updatePixel = (posX: number, posY: number, value: number) => {
   // visualsStore.getHighlightFrame(w, h, r, conv2dStore.input)
 }
 
-console.log(props.size)
-
 </script>
 
 <template>

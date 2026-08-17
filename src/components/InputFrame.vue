@@ -11,7 +11,7 @@ import KernelView from './Kernel/KernelView.vue';
     <div class="flex items-center justify-center w-lg max-h-150">
       <PixelsMatrix />
     </div>
-    <div class="flex min-w-50 items-center justify-center max-h-128">
+    <div class="flex min-w-100 items-center justify-center max-h-128">
       <KernelView />
     </div>
     <div class="flex items-center justify-center w-lg max-h-128">

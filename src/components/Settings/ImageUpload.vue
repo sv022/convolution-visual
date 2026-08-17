@@ -27,18 +27,19 @@
 
   async function onDrop(files : File[] | null) {
     if (!files) return
+    const resizeTo = 64
     const imageBlob = await (files[0].bytes())
     const pixelsRGB = await (jpegUint8ArrayToRgb(imageBlob))
-    const pixelsGrayscale = rgbToGrayscale(Array.from(pixelsRGB.data))
+    const pixelsGrayscale = rgbToGrayscale(Uint8Array.from(pixelsRGB.data))
     let pixels = []
-    if (pixelsRGB.height === 32 && pixelsRGB.width === 32){
+    if (pixelsRGB.height === resizeTo && pixelsRGB.width === resizeTo){
       pixels = pixelsGrayscale
     } else {
-      pixels = resizeImage(pixelsGrayscale, pixelsRGB.width, pixelsRGB.height, 32)
+      pixels = resizeImage(pixelsGrayscale, pixelsRGB.width, pixelsRGB.height, resizeTo)
     }
     uploadedImage.value = {
-      width : 32,
-      height : 32,
+      width : resizeTo,
+      height : resizeTo,
       pixels : pixels
     }
   }
@@ -68,13 +69,13 @@
         Upload Image
       </Button>
     </DialogTrigger>
-    <DialogContent class="sm:max-w-[425px] md:max-w-[600px]">
+    <DialogContent class="sm:max-w-106.25 md:max-w-150">
       <DialogHeader>
         <DialogTitle>Image upload</DialogTitle>
         <DialogDescription>
           <p>Upload your image here. Once it's uploaded, click "Save" button.</p>
-          <p>Your image will be converted to grayscale resized to 32x32.</p>
-          <p>For best result use 32x32 images.</p>
+          <p>Your image will be converted to grayscale resized to 64x64.</p>
+          <p>For best result use 64x64 images.</p>
         </DialogDescription>
       </DialogHeader>
       <div ref="dropZoneRef" class="flex items-center justify-center w-full aspect-video border border-emerald-800 border-dashed cursor-pointer">

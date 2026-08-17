@@ -1,15 +1,24 @@
-export default function rgbToGrayscale(rgbArray: number[]): number[] {
-  const grayscaleArray: number[] = []
+// Качественный перевод с учетом гамма-коррекции sRGB
+export default function rgbToGrayscale(rgbArray: Uint8Array): number[] {
+  const grayscale = new Array(rgbArray.length / 3)
 
-  for (let i = 0; i < rgbArray.length; i += 3) {
-    const r = rgbArray[i]
-    const g = rgbArray[i + 1]
-    const b = rgbArray[i + 2]
+  for (let i = 0, j = 0; i < rgbArray.length; i += 3, j++) {
+    // 1. Нормализуем в 0..1
+    let r = rgbArray[i] / 255
+    let g = rgbArray[i + 1] / 255
+    let b = rgbArray[i + 2] / 255
 
-    const grayValue = Math.round(0.21 * r + 0.72 * g + 0.07 * b)
+    // 2. Делинеаризация (убираем гамму sRGB)
+    r = r <= 0.04045 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4)
+    g = g <= 0.04045 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4)
+    b = b <= 0.04045 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4)
 
-    grayscaleArray.push(Math.min(255, Math.max(0, grayValue)) / 255)
+    // 3. Считаем линейную яркость (Y)
+    const y = 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+    // 4. Возвращаем гамму sRGB для корректного отображения человеком
+    grayscale[j] = y <= 0.0031308 ? 12.92 * y : 1.055 * Math.pow(y, 1 / 2.4) - 0.055
   }
 
-  return grayscaleArray
+  return grayscale
 }

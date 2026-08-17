@@ -64,7 +64,7 @@ export function resizeImage(
         c * (1 - xDiff) * yDiff +
         d * xDiff * yDiff
 
-      resizedPixels[y * newSize + x] = Math.round(interpolatedValue)
+      resizedPixels[y * newSize + x] = interpolatedValue
     }
   }
 
