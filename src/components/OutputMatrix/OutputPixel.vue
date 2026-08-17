@@ -15,7 +15,7 @@
 <template>
 
   <div
-    :class="cn('flex justify-center items-center size-10 border text-[7px]', props.size, { 'border-red-500': props.highlight })"
+    :class="cn('flex justify-center items-center border', props.size, { 'border-red-500': props.highlight })"
     :style="{ backgroundColor: grayscaleToHex(props.value), color: invertGrayscaleToHex(props.value) }">
     {{ props.value ? props.value.toFixed(2) : '0' }}
   </div>

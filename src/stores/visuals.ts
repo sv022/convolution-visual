@@ -72,11 +72,11 @@ export const useVisualsStore = defineStore('visuals', () => {
     highlightPixel,
     framePixelValues,
     framePixelValuesRGB,
+    kernelViewType,
     getHighlightFrame,
     getHighlightFrameRGB,
     clearHighlight,
     checkHighlight,
     toggleKernelView,
-    kernelViewType,
   }
 })
