@@ -23,6 +23,8 @@
   import { Kernels } from '@/types/kernels';
   import { kernelNameMap } from '@/utils/kernelNames';
   import { ref } from 'vue';
+import Button from '../ui/button/Button.vue';
+import { LucideGrid, LucideGrip } from 'lucide-vue-next';
 
   const conv2dStore = useconv2dStore()
 
@@ -51,7 +53,7 @@
 <template>
 
   <div class="flex flex-col items-center h-full w-full">
-    <div class="w-dvw md:w-[440px] p-2">
+    <div class="w-dvw md:w-110 p-2">
       <h3 class="text-3xl font-bold pb-3 text-center">Kernel Settings</h3>
       <NumberField class="p-2" id="size" :disabled="conv2dStore.isKernelSelected" :default-value="3" :min="1" :step="2"
         :max="7" :model-value="conv2dStore.kernel.height">
@@ -71,30 +73,44 @@
           <NumberFieldIncrement @click="conv2dStore.stride++; visualsStore.clearHighlight()" />
         </NumberFieldContent>
       </NumberField>
-      <div class="p-2">
-        <Select id="kernelSelect" v-model="selectedKernel" @update:model-value="setKernel">
-          <Label for="kernelSelect" class="pb-2">Kernel type</Label>
-          <SelectTrigger class="w-[180px]">
-            <SelectValue placeholder="Select a kernel" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel class="font-semibold">Kernels</SelectLabel>
-              <SelectItem value='random'>
-                Random
-              </SelectItem>
-              <SelectItem v-for="kernel in Object.values(Kernels)" :key="kernel.toString()" :value="kernel.valueOf()"
-                :class="kernel">
-                {{ kernelNameMap[kernel] }}
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+      <div class="flex p-2 space-x-2">
+        <div>
+          <Select id="kernelSelect" v-model="selectedKernel" @update:model-value="setKernel">
+            <Label for="kernelSelect" class="pb-2">Kernel type</Label>
+            <SelectTrigger class="w-45">
+              <SelectValue placeholder="Select a kernel" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel class="font-semibold">Kernels</SelectLabel>
+                <SelectItem value='random'>
+                  Random
+                </SelectItem>
+                <SelectItem v-for="kernel in Object.values(Kernels)" :key="kernel.toString()" :value="kernel.valueOf()"
+                  :class="kernel">
+                  {{ kernelNameMap[kernel] }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label for="toggleKernelView">Toggle kernel view</Label>
+          <Button id="toggleKernelView" variant="outline" class="mt-2" @click="visualsStore.toggleKernelView">
+            <div class="flex items-center space-x-2">
+              <LucideGrip v-if="visualsStore.kernelViewType === 'matrix'" />
+              <LucideGrid v-else />
+              <p>
+                {{ visualsStore.kernelViewType === 'matrix' ? 'Matrix' : 'Feature Map' }}
+              </p>
+            </div>
+          </Button>
+        </div>
       </div>
       <div class="p-2">
         <Select id="operationSelect" v-model="operation" @update:model-value="setOperation">
           <Label for="operationSelect" class="pb-2">Operation</Label>
-          <SelectTrigger class="w-[180px]">
+          <SelectTrigger class="w-45">
             <SelectValue placeholder="Select an operation" />
           </SelectTrigger>
           <SelectContent>

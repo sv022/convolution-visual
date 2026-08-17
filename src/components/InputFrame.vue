@@ -1,20 +1,20 @@
-<script setup
-  lang="ts">
+<script setup lang="ts">
 
-  import PixelsMatrix from './PixelsMatrix/PixelsMatrix.vue';
-  import KernelMatrix from './KernelMatrix/KernelMatrix.vue';
-  import OutputMatrix from './OutputMatrix/OutputMatrix.vue';
+import PixelsMatrix from './PixelsMatrix/PixelsMatrix.vue';
+import OutputMatrix from './OutputMatrix/OutputMatrix.vue';
+import KernelView from './Kernel/KernelView.vue';
+
 </script>
 
 <template>
-  <div class="w-full space-y-10 md:flex md:h-[512px] md:min-w-[1140px]">
-    <div class="flex flex-1/3 items-center justify-center max-h-[512px] overflow-y-scroll">
+  <div class="flex flex-col items-center space-y-10 md:flex-row md:justify-around md:h-150 md:min-w-285">
+    <div class="flex items-center justify-center w-lg max-h-150">
       <PixelsMatrix />
     </div>
-    <div class="flex flex-1/3 min-w-[200px] items-center justify-center max-h-[512px]">
-      <KernelMatrix />
+    <div class="flex min-w-50 items-center justify-center max-h-128">
+      <KernelView />
     </div>
-    <div class="flex flex-1/3 items-center justify-center max-h-[512px]">
+    <div class="flex items-center justify-center w-lg max-h-128">
       <OutputMatrix />
     </div>
   </div>

@@ -1,16 +1,15 @@
-<script setup
-  lang="ts">
-  import { useconv2dStore } from '@/stores/conv2d'
-  import KernelPixelItem from './KernelPixelItem.vue'
-  import { useVisualsStore } from '@/stores/visuals'
-  import { computed } from 'vue'
-  import grayscaleToHex from '@/utils/grayscaleToHex'
-  import invertGrayscaleToHex from '@/utils/invertGrayscale'
-  import { storeToRefs } from 'pinia'
+<script setup lang="ts">
+import { useconv2dStore } from '@/stores/conv2d'
+import { useVisualsStore } from '@/stores/visuals'
+import { computed } from 'vue'
+import grayscaleToHex from '@/utils/grayscaleToHex'
+import invertGrayscaleToHex from '@/utils/invertGrayscale'
 import { cn } from '@/lib/utils.ts'
+import KernelMatrix from './KernelMatrix.vue'
+import KernelFeatureMap from './KernelFeatureMap.vue'
+
 
   const conv2dstore = useconv2dStore()
-
   const visualsStore = useVisualsStore()
 
   const outputPixelValue = computed<string>(() => {
@@ -43,19 +42,10 @@ import { cn } from '@/lib/utils.ts'
     return invertGrayscaleToHex(Number(outputPixelValue.value))
   })
 
-  const { kernel } = storeToRefs(conv2dstore)
-  const { framePixelValues } = storeToRefs(visualsStore)
-
   const kernelPixelSize = computed(() => {
     if (conv2dstore.kernel.width === 7) return 'size-7'
     if (conv2dstore.kernel.width === 5) return 'size-13'
     return 'size-15'
-  })
-
-  const pixelSpacing = computed(() => {
-    if (kernel.value.height == 7) return 'flex space-x-7'
-    if (kernel.value.height == 5) return 'flex space-x-10'
-    return 'flex space-x-11'
   })
 
   const kernelSum = computed(() => {
@@ -67,22 +57,19 @@ import { cn } from '@/lib/utils.ts'
 </script>
 
 <template>
-  <div class="space-y-3">
-    <div class="text-center">
+
+<div class="space-y-4 translate-y-5">
+  <div class="text-center">
       Kernel sum:
       <mark class="bg-transparent font-bold text-emerald-800">{{
         Math.round(kernelSum * 100) / 100
       }}</mark>
-    </div>
-    <div>
-      <div v-for="i in conv2dstore.kernel.height" v-bind:key="i" :class="pixelSpacing">
-        <KernelPixelItem v-for="j in conv2dstore.kernel.height" v-bind:key="conv2dstore.kernel.height * (i - 1) + j"
-          :value="kernel.pixels[(i - 1) * kernel.width + (j - 1)]"
-          :pixel-value="framePixelValues[(j - 1) * conv2dstore.kernel.width + (i - 1)]" :pos-x="i" :pos-y="j"
-          :size="kernelPixelSize" />
-      </div>
-    </div>
-    <div class="flex flex-col items-center justify-center text-center space-y-2">
+  </div>
+  <div class="flex space-x-4 items-center">
+    <KernelMatrix v-if="visualsStore.kernelViewType === 'matrix'" />
+    <KernelFeatureMap v-else />
+  </div>
+  <div class="flex flex-col items-center justify-center text-center space-y-2">
       <div class="font-bold text-2xl">=</div>
       <div :class="cn('flex items-center justify-center', kernelPixelSize)"
         :style="{ backgroundColor: outputPixelBGColor, color: outputPixelTextColor }">
@@ -94,5 +81,6 @@ import { cn } from '@/lib/utils.ts'
         </p>
       </div>
     </div>
-  </div>
+</div>
+
 </template>

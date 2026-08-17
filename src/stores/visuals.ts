@@ -14,6 +14,7 @@ export const useVisualsStore = defineStore('visuals', () => {
   const framePixelValues = ref<number[]>(Array.from({ length: 3 * 3 }, () => 0))
   const framePixelValuesRGB = ref<number[][]>(Array.from({ length: 3 * 3 }, () => [0, 0, 0]))
   const channels = ref<('R' | 'G' | 'B' | 'GS')[]>(['GS'])
+  const kernelViewType = ref<'matrix' | 'features'>('matrix')
 
   function getHighlightFrame(
     w: number,
@@ -61,6 +62,10 @@ export const useVisualsStore = defineStore('visuals', () => {
     framePixelValuesRGB.value = Array.from({ length: 7 * 7 }, () => [0, 0, 0])
   }
 
+  function toggleKernelView() {
+    kernelViewType.value = kernelViewType.value === 'matrix' ? 'features' : 'matrix'
+  }
+
   return {
     channels,
     highlightFrame,
@@ -71,5 +76,7 @@ export const useVisualsStore = defineStore('visuals', () => {
     getHighlightFrameRGB,
     clearHighlight,
     checkHighlight,
+    toggleKernelView,
+    kernelViewType,
   }
 })
