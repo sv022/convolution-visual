@@ -14,7 +14,6 @@
         if (index == 0) {
             return
         }
-        conv2dstore.resetKernel()
         conv2dstore.setImage(exampleImages(index), 28, 28)
         conv2dstore.isExampleSelected = true
     }

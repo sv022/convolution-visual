@@ -66,7 +66,27 @@ export const useconv2dStore = defineStore('conv2d', () => {
   }
 
   const setOperation = (op: 'convolution' | 'correlation') => {
+    if (op === operation.value) return
     operation.value = op
+    rotateKernel()
+  }
+
+  const rotateKernel = () => {
+    const { width, height, pixels } = kernel.value
+
+    const temp = [...pixels]
+
+    kernel.value.width = height
+    kernel.value.height = width
+
+    for (let i = 0; i < width; i++) {
+      for (let j = 0; j < height; j++) {
+        const newIndex = i * height + j
+        const oldIndex = (width - i - 1) * height + j
+
+        kernel.value.pixels[newIndex] = temp[oldIndex]
+      }
+    }
   }
 
   const resetKernel = () => {
