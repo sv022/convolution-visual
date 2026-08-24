@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { cn } from '@/lib/utils';
-import HoverCard from '../ui/hover-card/HoverCard.vue';
-import HoverCardContent from '../ui/hover-card/HoverCardContent.vue';
-import HoverCardTrigger from '../ui/hover-card/HoverCardTrigger.vue';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu'
 import grayscaleToHex from '@/utils/grayscaleToHex';
 import { Slider } from '@/components/ui/slider'
 import { Label } from '@/components/ui/label'
 import { computed, ref } from 'vue';
 import { useconv2dStore } from '@/stores/conv2d';
+import { useVisualsStore } from '@/stores/visuals';
 import { Button } from '../ui/button';
 import invertGrayscaleToHex from '@/utils/invertGrayscale';
 
 const conv2dStore = useconv2dStore()
+const visualsStore = useVisualsStore()
 
 const props = defineProps<{
   value: number
@@ -64,29 +68,33 @@ const updatePixel = (posX: number, posY: number, value: number) => {
 
 <template>
   <div>
-    <HoverCard :open-delay="1500" :close-delay="1000">
-      <HoverCardTrigger>
+    <ContextMenu :open-delay="1500" :close-delay="1000">
+      <ContextMenuTrigger>
         <div
           :class="cn('flex items-center justify-center border', props.size, { 'border-red-500': props.highlight })"
           :style="{ backgroundColor: grayscaleToHex(props.value), color: invertGrayscaleToHex(props.value) }">
-          {{ props.value ? props.value.toFixed(2) : '0' }}
+          <p v-if="visualsStore.showPixelValues">{{ props.value ? props.value.toFixed(2) : '0' }}</p>
         </div>
-      </HoverCardTrigger>
-      <HoverCardContent>
-        <div class="space-y-2">
-          <Label class="p-2" for="slider">Pixel value: {{ pixelValue }}</Label>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <div>
+          <Label class="flex justify-center w-full p-2 font-bold text-xl" for="slider">
+            <p>{{ pixelValue ? pixelValue[0].toFixed(2) : '0' }}</p>
+          </Label>
           <span class="flex">
             <Button variant="ghost" @click="updatePixel(props.posX, props.posY, pixelValue[0] - step)"
               @click.shift.stop="updatePixel(props.posX, props.posY, pixelValue[0] - step * 10)">-</Button>
             <Slider id="slider" v-model="pixelValue" :min="0" :max="1" :step="0.05"
               @update:model-value="updatePixel(props.posX, props.posY, pixelValue[0])" />
             <Button variant="ghost" @click="updatePixel(props.posX, props.posY, pixelValue[0] + step)"
-              @click.shift.stop="updatePixel(props.posX, props.posY, pixelValue[0] + step * 10)">-</Button>
+              @click.shift.stop="updatePixel(props.posX, props.posY, pixelValue[0] + step * 10)">+</Button>
           </span>
-          <Label class="p-2">Position: ({{ props.posX }}, {{ props.posY }})</Label>
+          <Label class="flex justify-center w-full p-2">
+            <p>({{ props.posX }}, {{ props.posY }})</p>
+          </Label>
         </div>
-      </HoverCardContent>
-    </HoverCard>
+      </ContextMenuContent>
+    </ContextMenu>
   </div>
 
 </template>

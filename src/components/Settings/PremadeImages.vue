@@ -10,7 +10,6 @@ const visualsStore = useVisualsStore()
 function setImage(index: number): void {
     visualsStore.clearHighlight()
     conv2dstore.setImage(exampleImages(index), 28, 28)
-    conv2dstore.isExampleSelected = true
 }
 
 onMounted(() => {
@@ -20,7 +19,7 @@ onMounted(() => {
 </script>
 <template>
 
-<div class="p-2">
+<div>
     <Label>Example images</Label>
     <div class="flex space-x-2 py-2">
         <img width="80" src="@/assets/image_0.png" alt="0" @click="setImage(0)">

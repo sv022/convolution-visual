@@ -26,7 +26,7 @@ export default function getPixelSize(width: number, height: number) {
   }
   const pixelSizeMap: { [key: number]: string } = {
     64: 'size-2 text-[0px]',
-    32: 'size-3 text-[0px]',
+    32: 'size-3 text-[4px]',
     24: 'size-4 text-[7px]',
     16: 'size-5 text-[7px]',
     12: 'size-6 text-[8px]',

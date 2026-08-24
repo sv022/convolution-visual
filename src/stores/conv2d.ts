@@ -20,20 +20,11 @@ export const useconv2dStore = defineStore('conv2d', () => {
 
   const padding = ref<number>(0)
   const stride = ref<number>(1)
-  const isExampleSelected = ref<boolean>(false)
   const isKernelSelected = ref<boolean>(false)
 
   function setImage(pixels: number[], widthNew: number, heightNew: number) {
+    padding.value = 0
     input.value = imageformat(pixels, widthNew, heightNew, padding.value)
-  }
-
-  const incrementInputSize = () => {
-    input.value.height++
-    input.value.width++
-  }
-  const decrementInputSize = () => {
-    input.value.height--
-    input.value.width--
   }
   const incrementPadding = () => {
     padding.value++
@@ -111,12 +102,9 @@ export const useconv2dStore = defineStore('conv2d', () => {
     padding,
     stride,
     inputResult,
-    isExampleSelected,
     isKernelSelected,
     output,
     setImage,
-    incrementInputSize,
-    decrementInputSize,
     incrementKernelSize,
     decrementKernelSize,
     incrementPadding,

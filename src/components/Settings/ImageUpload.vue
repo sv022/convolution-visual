@@ -47,7 +47,6 @@ async function onDrop(files : File[] | null) {
 
 function onSave(){
   conv2dStore.input = uploadedImage.value!
-  conv2dStore.isExampleSelected = true
   uploadedImage.value = undefined
 }
 
@@ -65,7 +64,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
 <template>
   <Dialog>
     <DialogTrigger as-child>
-      <Button variant="outline"  class="mx-2">
+      <Button variant="outline">
         Upload Image
       </Button>
     </DialogTrigger>
