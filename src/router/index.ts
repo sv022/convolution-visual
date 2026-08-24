@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Conv2dView from '@/views/Conv2dView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 
 const router = createRouter({
@@ -8,15 +7,9 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      meta: { title: 'Convolution visual | Home' },
-      component: HomeView,
-    },
-    {
-      path: '/conv2d',
       name: 'Conv2d Visualization',
       meta: { title: 'Convolution visual | GrayScale' },
-      component: Conv2dView,
+      component: HomeView,
     },
     {
       path: '/:pathMatch(.*)*',

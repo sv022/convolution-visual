@@ -1,15 +1,22 @@
-<script setup
-  lang="ts">
-  import { RouterLink } from 'vue-router'
+<script setup lang="ts">
+import InputFrame from '@/components/InputFrame.vue'
+import SettingsFrame from '@/components/SettingsFrame.vue'
+import { useVisualsStore } from '@/stores/visuals'
+import { onMounted } from 'vue'
+
+const visualsStore = useVisualsStore()
+onMounted(() => {
+  visualsStore.highlightFrame = [[]]
+  visualsStore.highlightPixel = [0, 0]
+  visualsStore.channels = ['GS']
+})
 </script>
 
 <template>
-  <main class="md:flex justify-center space-x-10 items-center md:py-[20dvh]">
-    <RouterLink to="/conv2d">
-      <div class="border p-2 border-gray-500 rounded-md">
-        <img src="../assets/homepage_demo2.png" alt="demo" width="600" />
-        <h2 class="text-2xl font-bold text-center">Convolution Grayscale</h2>
-      </div>
-    </RouterLink>
+  <main>
+    <InputFrame />
+    <div class="flex justify-center p-2 md:p-0">
+      <SettingsFrame />
+    </div>
   </main>
 </template>
