@@ -21,7 +21,7 @@ export default function getPixelSize(width: number, height: number) {
   if (width >= 32) {
     sizeRound = 32
   }
-  if (width >= 64) {
+  if (width >= 42) {
     sizeRound = 64
   }
   const pixelSizeMap: { [key: number]: string } = {

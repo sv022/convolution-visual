@@ -10,9 +10,12 @@ import {
 
 import PremadeImages from './PremadeImages.vue';
 import { useconv2dStore } from '@/stores/conv2d';
+import { useVisualsStore } from '@/stores/visuals.ts';
 import ImageUpload from './ImageUpload.vue';
+import Checkbox from '../ui/checkbox/Checkbox.vue';
 
 const conv2dStore = useconv2dStore()
+const visualsStore = useVisualsStore()
 
 </script>
 
@@ -20,19 +23,9 @@ const conv2dStore = useconv2dStore()
 
 <template>
 
-  <div class="flex flex-col items-center h-full w-full">
-    <div class="w-dvw md:w-110 p-2">
-      <h3 class="text-center text-3xl font-bold pb-3">Input Settings</h3>
-      <NumberField class="p-2" id="size" :disabled="conv2dStore.isExampleSelected" :default-value="8" :min="2" :max="32"
-        :model-value="conv2dStore.input.height">
-        <Label for="size">Image Size</Label>
-        <NumberFieldContent>
-          <NumberFieldDecrement @click="conv2dStore.decrementInputSize()" />
-          <NumberFieldInput />
-          <NumberFieldIncrement @click="conv2dStore.incrementInputSize()" />
-        </NumberFieldContent>
-      </NumberField>
-      <NumberField class="p-2" id="padding" :default-value="0" :min="0" :model-value="conv2dStore.padding">
+  <div class="space-y-4">
+      <h3 class="text-center text-3xl font-bold">Input Settings</h3>
+      <NumberField id="padding" :default-value="0" :min="0" :max="5" :model-value="conv2dStore.padding">
         <Label for="padding">Padding</Label>
         <NumberFieldContent>
           <NumberFieldDecrement @click="conv2dStore.decrementPadding()" />
@@ -40,8 +33,11 @@ const conv2dStore = useconv2dStore()
           <NumberFieldIncrement @click="conv2dStore.incrementPadding()" />
         </NumberFieldContent>
       </NumberField>
+      <div class="flex items-center gap-3">
+        <Checkbox id="terms" v-model="visualsStore.showPixelValues" />
+        <Label for="terms">Show pixel values</Label>
+      </div>
       <PremadeImages />
       <ImageUpload />
-    </div>
   </div>
 </template>
