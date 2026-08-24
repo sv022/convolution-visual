@@ -30,10 +30,10 @@ export default function getPixelSize(width: number, height: number) {
     24: 'size-4 text-[7px]',
     16: 'size-5 text-[7px]',
     12: 'size-6 text-[8px]',
-    8: 'size-8 text-[10px]',
-    6: 'size-9 text-[12px]',
-    4: 'size-12 text-[12px]',
-    2: 'size-14 text-[14px]',
+    8: 'size-7 text-[10px]',
+    6: 'size-8 text-[12px]',
+    4: 'size-10 text-[12px]',
+    2: 'size-12 text-[14px]',
   }
   return pixelSizeMap[sizeRound]
 }

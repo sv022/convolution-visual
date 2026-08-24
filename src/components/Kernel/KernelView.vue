@@ -58,14 +58,14 @@ const kernelSum = computed(() => {
 
 <template>
 
-<div class="space-y-4 translate-y-5">
+<div class="space-y-2 translate-y-2">
   <div class="text-center">
       Kernel sum:
       <mark class="bg-transparent font-bold text-emerald-800">{{
         Math.round(kernelSum * 100) / 100
       }}</mark>
   </div>
-  <div class="flex space-x-4 items-center">
+  <div class="flex space-x-4 items-center justify-center">
     <KernelMatrix v-if="visualsStore.kernelViewType === 'matrix'" />
     <KernelFeatureMap v-else />
   </div>

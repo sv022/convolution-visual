@@ -9,7 +9,7 @@ import {
     DialogFooter
 } from '@/components/ui/dialog'
 import Button from '../ui/button/Button.vue'
-import { Upload } from 'lucide-vue-next';
+import { LucideUpload, Upload } from 'lucide-vue-next';
 import jpegUint8ArrayToRgb from '@/utils/uInt8ToRGB';
 import rgbToGrayscale from '@/utils/rgbToGrayscale';
 import { resizeImage } from '@/utils/imageformat';
@@ -68,16 +68,17 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
   <Dialog>
     <DialogTrigger as-child>
       <Button variant="outline">
-        Upload Image
+        <LucideUpload class="h-4 w-4 stroke-input" />
+        <p>Upload Image</p>
       </Button>
     </DialogTrigger>
     <DialogContent class="sm:max-w-106.25 md:max-w-150">
       <DialogHeader>
         <DialogTitle>Image upload</DialogTitle>
         <DialogDescription>
-          <p>Upload your image here. Once it's uploaded, click "Save" button.</p>
-          <p>Your image will be converted to grayscale resized to 64x64.</p>
-          <p>For best result use 64x64 images.</p>
+          <p>Drag and drop to upload your image. Once it's uploaded, click "Save" button.</p>
+          <p>Your image will be converted to grayscale and resized to 64x64.</p>
+          <p>For best result use 1:1 aspect ratio images.</p>
         </DialogDescription>
       </DialogHeader>
       <div ref="dropZoneRef" class="flex items-center justify-center w-full aspect-video border border-emerald-800 border-dashed cursor-pointer">
@@ -86,7 +87,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
       </div>
       <DialogFooter>
         <DialogClose as-child>
-          <Button @click="onSave" type="submit" :disabled="!uploadedImage">
+          <Button class="bg-mint-700/90 hover:bg-mint-700" @click="onSave" type="submit" :disabled="!uploadedImage">
             Save
           </Button>
         </DialogClose>

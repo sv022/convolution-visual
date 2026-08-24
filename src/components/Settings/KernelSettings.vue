@@ -113,8 +113,8 @@ function setOperation() {
       <Label for="toggleKernelView">Toggle kernel view</Label>
       <Button id="toggleKernelView" variant="outline" class="mt-2" @click="visualsStore.toggleKernelView">
         <div class="flex items-center space-x-2">
-          <LucideGrip v-if="visualsStore.kernelViewType === 'matrix'" />
-          <LucideGrid v-else />
+          <LucideGrip class="stroke-taupe-500" v-if="visualsStore.kernelViewType === 'matrix'" />
+          <LucideGrid class="stroke-taupe-500" v-else />
           <p>
             {{ visualsStore.kernelViewType === 'matrix' ? 'Matrix' : 'Feature Map' }}
           </p>
