@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { Label } from '@/components/ui/label'
 import { useconv2dStore } from '@/stores/conv2d';
 import { useVisualsStore } from '@/stores/visuals';

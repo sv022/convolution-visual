@@ -1,5 +1,4 @@
-<script setup
-  lang="ts">
+<script setup lang="ts">
   import { useconv2dStore } from '@/stores/conv2d'
   import PixelItem from './PixelItem.vue'
   import { computed } from 'vue'

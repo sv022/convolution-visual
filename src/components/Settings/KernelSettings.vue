@@ -1,52 +1,48 @@
-<script setup
-  lang="ts">
-
-  import { Label } from '@/components/ui/label'
-  import {
-    NumberField,
-    NumberFieldContent,
-    NumberFieldDecrement,
-    NumberFieldIncrement,
-    NumberFieldInput,
-  } from '@/components/ui/number-field'
-  import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-  } from '@/components/ui/select'
-  import { useconv2dStore } from '@/stores/conv2d';
-  import { useVisualsStore } from '@/stores/visuals';
-  import { Kernels } from '@/types/kernels';
-  import { kernelNameMap } from '@/utils/kernelNames';
-  import { ref } from 'vue';
+<script setup lang="ts">
+import { Label } from '@/components/ui/label'
+import {
+  NumberField,
+  NumberFieldContent,
+  NumberFieldDecrement,
+  NumberFieldIncrement,
+  NumberFieldInput,
+} from '@/components/ui/number-field'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { useconv2dStore } from '@/stores/conv2d';
+import { useVisualsStore } from '@/stores/visuals';
+import { Kernels } from '@/types/kernels';
+import { kernelNameMap } from '@/utils/kernelNames';
+import { ref } from 'vue';
 import Button from '../ui/button/Button.vue';
 import { LucideGrid, LucideGrip } from 'lucide-vue-next';
 
-  const conv2dStore = useconv2dStore()
+const conv2dStore = useconv2dStore()
+const visualsStore = useVisualsStore()
 
-  const visualsStore = useVisualsStore()
+const selectedKernel = ref<Kernels | 'random'>('random')
+const operation = ref<'convolution' | 'correlation'>('correlation')
 
-  const selectedKernel = ref<Kernels | 'random'>('random')
-
-  const operation = ref<'convolution' | 'correlation'>('correlation')
-
-  function setKernel() {
-    visualsStore.clearHighlight()
-    if (selectedKernel.value === 'random') {
-      conv2dStore.resetKernel()
-      return
-    }
-    conv2dStore.setKernel(selectedKernel.value)
+function setKernel() {
+  visualsStore.clearHighlight()
+  if (selectedKernel.value === 'random') {
+    conv2dStore.resetKernel()
+    return
   }
+  conv2dStore.setKernel(selectedKernel.value)
+}
 
-  function setOperation() {
-    visualsStore.clearHighlight()
-    conv2dStore.setOperation(operation.value)
-  }
+function setOperation() {
+  visualsStore.clearHighlight()
+  conv2dStore.setOperation(operation.value)
+}
 
 </script>
 

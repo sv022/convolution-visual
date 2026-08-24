@@ -1,19 +1,18 @@
-<script setup
-  lang="ts">
-  import { Label } from '@/components/ui/label'
-  import {
-    NumberField,
-    NumberFieldContent,
-    NumberFieldDecrement,
-    NumberFieldIncrement,
-    NumberFieldInput,
-  } from '@/components/ui/number-field'
+<script setup lang="ts">
+import { Label } from '@/components/ui/label'
+import {
+  NumberField,
+  NumberFieldContent,
+  NumberFieldDecrement,
+  NumberFieldIncrement,
+  NumberFieldInput,
+} from '@/components/ui/number-field'
 
-  import PremadeImages from './PremadeImages.vue';
-  import { useconv2dStore } from '@/stores/conv2d';
-  import ImageUpload from './ImageUpload.vue';
+import PremadeImages from './PremadeImages.vue';
+import { useconv2dStore } from '@/stores/conv2d';
+import ImageUpload from './ImageUpload.vue';
 
-  const conv2dStore = useconv2dStore()
+const conv2dStore = useconv2dStore()
 
 </script>
 

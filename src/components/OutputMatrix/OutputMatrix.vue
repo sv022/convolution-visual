@@ -1,33 +1,31 @@
-<script setup
-  lang="ts">
-  import { useconv2dStore } from '@/stores/conv2d';
-  import OutputPixel from './OutputPixel.vue';
-  import { useVisualsStore } from '@/stores/visuals';
-  import { computed } from 'vue';
-  import getPixelSize from '@/utils/pixelSize';
+<script setup lang="ts">
+import { useconv2dStore } from '@/stores/conv2d';
+import OutputPixel from './OutputPixel.vue';
+import { useVisualsStore } from '@/stores/visuals';
+import { computed } from 'vue';
+import getPixelSize from '@/utils/pixelSize';
 
-  const conv2dstore = useconv2dStore()
-  const visualsStore = useVisualsStore()
+const conv2dstore = useconv2dStore()
+const visualsStore = useVisualsStore()
 
-  function getHighlightFrame(w: number, h: number) {
-    visualsStore.getHighlightFrame(w, h, conv2dstore.kernel.width, conv2dstore.inputResult, conv2dstore.padding, conv2dstore.stride)
-  }
+function getHighlightFrame(w: number, h: number) {
+  visualsStore.getHighlightFrame(w, h, conv2dstore.kernel.width, conv2dstore.inputResult, conv2dstore.padding, conv2dstore.stride)
+}
 
-  const width = computed(() => {
-    return conv2dstore.inputResult.width
-  })
-  const height = computed(() => {
-    return conv2dstore.inputResult.height
-  })
+const width = computed(() => {
+  return conv2dstore.inputResult.width
+})
+const height = computed(() => {
+  return conv2dstore.inputResult.height
+})
 
-  const pixelSize = computed(() => {
-    return getPixelSize(width.value, height.value)
-  })
+const pixelSize = computed(() => {
+  return getPixelSize(width.value, height.value)
+})
 
-  const checkHighlightPixel = (i: number, j: number) => {
-    return visualsStore.highlightPixel[0] === i && visualsStore.highlightPixel[1] === j
-  }
-
+const checkHighlightPixel = (i: number, j: number) => {
+  return visualsStore.highlightPixel[0] === i && visualsStore.highlightPixel[1] === j
+}
 </script>
 
 <template>

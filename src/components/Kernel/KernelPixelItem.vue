@@ -1,74 +1,73 @@
-<script setup
-  lang="ts">
-  import grayscaleToHex from '@/utils/grayscaleToHex'
-  import HoverCard from '../ui/hover-card/HoverCard.vue'
-  import HoverCardContent from '../ui/hover-card/HoverCardContent.vue'
-  import HoverCardTrigger from '../ui/hover-card/HoverCardTrigger.vue'
-  import invertGrayscaleToHex from '@/utils/invertGrayscale'
-  import { computed, ref, watch } from 'vue'
-  import { useconv2dStore } from '@/stores/conv2d'
-  import Label from '../ui/label/Label.vue'
-  import Slider from '../ui/slider/Slider.vue'
-  import { cn } from '@/lib/utils'
-  import Button from '../ui/button/Button.vue'
+<script setup lang="ts">
+import grayscaleToHex from '@/utils/grayscaleToHex'
+import HoverCard from '../ui/hover-card/HoverCard.vue'
+import HoverCardContent from '../ui/hover-card/HoverCardContent.vue'
+import HoverCardTrigger from '../ui/hover-card/HoverCardTrigger.vue'
+import invertGrayscaleToHex from '@/utils/invertGrayscale'
+import { computed, ref, watch } from 'vue'
+import { useconv2dStore } from '@/stores/conv2d'
+import Label from '../ui/label/Label.vue'
+import Slider from '../ui/slider/Slider.vue'
+import { cn } from '@/lib/utils'
+import Button from '../ui/button/Button.vue'
 
-  const conv2dStore = useconv2dStore()
+const conv2dStore = useconv2dStore()
 
-  const props = defineProps<{
-    value: number
-    pixelValue: number
-    posX: number
-    posY: number
-    size: string
-  }>()
+const props = defineProps<{
+  value: number
+  pixelValue: number
+  posX: number
+  posY: number
+  size: string
+}>()
 
-  const val = ref<number[]>([Math.round(props.value * 100) / 100])
-  const pixelVal = computed<number>(() => props.pixelValue || 0)
+const val = ref<number[]>([Math.round(props.value * 100) / 100])
+const pixelVal = computed<number>(() => props.pixelValue || 0)
 
-  const step = 0.01
+const step = 0.01
 
-  const pixelValue = computed({
-    get() {
-      return [Math.round(props.value * 100) / 100]
-    },
-    set(newValue) {
-      val.value = newValue
-    },
-  })
+const pixelValue = computed({
+  get() {
+    return [Math.round(props.value * 100) / 100]
+  },
+  set(newValue) {
+    val.value = newValue
+  },
+})
 
-  const pixelFontSize = computed<string>(() => {
-    if (props.size == 'size-7') return 'text-[12px]'
-    return 'text-md'
-  })
+const pixelFontSize = computed<string>(() => {
+  if (props.size == 'size-7') return 'text-[12px]'
+  return 'text-md'
+})
 
-  const kernelValueTextStyle = computed<string>(() => {
-    if (props.value > 0) return 'text-emerald-700'
-    else if (props.value < 0) return 'text-rose-700'
-    return 'text-neutral-700'
-  })
+const kernelValueTextStyle = computed<string>(() => {
+  if (props.value > 0) return 'text-emerald-700'
+  else if (props.value < 0) return 'text-rose-700'
+  return 'text-neutral-700'
+})
 
-  const bgColor = computed<string>(() => {
-    return grayscaleToHex(pixelVal.value)
-  })
+const bgColor = computed<string>(() => {
+  return grayscaleToHex(pixelVal.value)
+})
 
-  const setKernelPixel = () => {
-    conv2dStore.setKernelPixel(props.posX - 1, props.posY - 1, val.value[0])
-    return
-  }
-  const incrementKernelPixel = (step: number) => {
-    val.value[0] += step
-    setKernelPixel()
-  }
+const setKernelPixel = () => {
+  conv2dStore.setKernelPixel(props.posX - 1, props.posY - 1, val.value[0])
+  return
+}
+const incrementKernelPixel = (step: number) => {
+  val.value[0] += step
+  setKernelPixel()
+}
 
-  const decrementKernelPixel = (step: number) => {
-    val.value[0] -= step
-    setKernelPixel()
-  }
+const decrementKernelPixel = (step: number) => {
+  val.value[0] -= step
+  setKernelPixel()
+}
 
-  watch(
-    () => props.value,
-    () => (val.value[0] = props.value),
-  )
+watch(
+  () => props.value,
+  () => (val.value[0] = props.value),
+)
 </script>
 
 <template>

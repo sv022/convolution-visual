@@ -1,8 +1,6 @@
-<script setup
-  lang="ts">
-  import ImageSettings from './Settings/ImageSettings.vue';
-  import KernelSettings from './Settings/KernelSettings.vue';
-
+<script setup lang="ts">
+import ImageSettings from './Settings/ImageSettings.vue';
+import KernelSettings from './Settings/KernelSettings.vue';
 </script>
 
 <template>
