@@ -61,7 +61,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="translate-y-5">
     <div class="border">
       <div v-for="i in height" v-bind:key="-i" class="flex">
         <PixelItem v-for="j in width" v-bind:key="i * height + j"

@@ -58,7 +58,7 @@ const kernelSum = computed(() => {
 
 <template>
 
-<div class="space-y-2 translate-y-2">
+<div class="space-y-2 translate-y-2 min-w-100">
   <div class="text-center">
       Kernel sum:
       <mark class="bg-transparent font-bold text-emerald-800">{{
