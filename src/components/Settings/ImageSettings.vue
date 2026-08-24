@@ -34,7 +34,7 @@ const visualsStore = useVisualsStore()
         </NumberFieldContent>
       </NumberField>
       <div class="flex items-center gap-3">
-        <Checkbox id="terms" v-model="visualsStore.showPixelValues" />
+        <Checkbox id="terms" v-model="visualsStore.showPixelValues" :disabled="conv2dStore.input.width > 32" />
         <Label for="terms">Show pixel values</Label>
       </div>
       <PremadeImages />

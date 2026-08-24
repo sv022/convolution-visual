@@ -20,10 +20,12 @@ import type { Image } from '@/types/image';
 import UploadPreview from './UploadPreview.vue';
 import { useconv2dStore } from '@/stores/conv2d';
 import DialogClose from '../ui/dialog/DialogClose.vue';
+import { useVisualsStore } from '@/stores/visuals.ts';
 
 const uploadedImage = ref<Image>()
 
 const conv2dStore = useconv2dStore()
+const visualsStore = useVisualsStore()
 
 async function onDrop(files : File[] | null) {
   if (!files) return
@@ -48,6 +50,7 @@ async function onDrop(files : File[] | null) {
 function onSave(){
   conv2dStore.input = uploadedImage.value!
   uploadedImage.value = undefined
+  visualsStore.showPixelValues = false
 }
 
 const dropZoneRef = ref<HTMLDivElement>()
