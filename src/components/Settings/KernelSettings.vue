@@ -49,7 +49,7 @@ function setOperation() {
 <template>
 
   <div class="space-y-4">
-    <h3 class="text-3xl font-bold pb-3 text-center">Kernel Settings</h3>
+    <h3 class="text-3xl font-bold text-center text-carbon">Kernel Settings</h3>
     <NumberField id="size" :disabled="conv2dStore.isKernelSelected" :default-value="3" :min="1" :step="2"
       :max="7" :model-value="conv2dStore.kernel.height">
       <Label for="size">Kernel Size</Label>

@@ -24,7 +24,7 @@ const visualsStore = useVisualsStore()
 <template>
 
   <div class="space-y-4">
-      <h3 class="text-center text-3xl font-bold">Input Settings</h3>
+      <h3 class="text-center text-3xl font-bold text-carbon">Input Settings</h3>
       <NumberField id="padding" :default-value="0" :min="0" :max="5" :model-value="conv2dStore.padding">
         <Label for="padding">Padding</Label>
         <NumberFieldContent>
@@ -34,7 +34,7 @@ const visualsStore = useVisualsStore()
         </NumberFieldContent>
       </NumberField>
       <div class="flex items-center gap-3">
-        <Checkbox id="terms" v-model="visualsStore.showPixelValues" :disabled="conv2dStore.input.width > 32" />
+        <Checkbox  id="terms" v-model="visualsStore.showPixelValues" :disabled="conv2dStore.input.width > 32" />
         <Label for="terms">Show pixel values</Label>
       </div>
       <PremadeImages />
