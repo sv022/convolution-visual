@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import grayscaleToHex from '@/utils/grayscaleToHex'
-import HoverCard from '../ui/hover-card/HoverCard.vue'
-import HoverCardContent from '../ui/hover-card/HoverCardContent.vue'
-import HoverCardTrigger from '../ui/hover-card/HoverCardTrigger.vue'
-import invertGrayscaleToHex from '@/utils/invertGrayscale'
+import { cn } from '@/lib/utils'
 import { computed, ref, watch } from 'vue'
-import { useconv2dStore } from '@/stores/conv2d'
+import grayscaleToHex from '@/utils/grayscaleToHex'
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu'
 import Label from '../ui/label/Label.vue'
 import Slider from '../ui/slider/Slider.vue'
-import { cn } from '@/lib/utils'
 import Button from '../ui/button/Button.vue'
+import invertGrayscaleToHex from '@/utils/invertGrayscale'
+import { useconv2dStore } from '@/stores/conv2d'
 
 const conv2dStore = useconv2dStore()
 
@@ -71,22 +73,24 @@ watch(
 </script>
 
 <template>
-  <HoverCard>
+  <ContextMenu>
     <div class="flex flex-col items-center">
 
       <div :class="cn('flex justify-center items-center border text-gray-500', props.size, pixelFontSize)
         " :style="{ backgroundColor: bgColor, color: invertGrayscaleToHex(pixelVal) }">
         {{ pixelVal.toFixed(2) }}
       </div>
-      <HoverCardTrigger>
+      <ContextMenuTrigger>
         <div class="flex items-center justify-center h-10 w-10 text-nowrap text-md">
           <mark>x <wbr /></mark><mark :class="kernelValueTextStyle">{{ props.value.toFixed(2) }}</mark>
         </div>
-      </HoverCardTrigger>
+      </ContextMenuTrigger>
     </div>
-    <HoverCardContent>
-      <div class="space-y-2">
-        <Label class="p-2" for="slider">Kernel value: {{ pixelValue }}</Label>
+    <ContextMenuContent>
+      <div>
+        <Label class="flex justify-center w-full p-2 font-bold text-xl" for="slider">
+            <p>{{ pixelValue ? pixelValue[0].toFixed(2) : '0' }}</p>
+        </Label>
         <span class="flex">
           <Button variant="ghost" @click="decrementKernelPixel(step)"
             @click.shift.stop="decrementKernelPixel(step * 10)">-</Button>
@@ -95,10 +99,12 @@ watch(
           <Button variant="ghost" @click="incrementKernelPixel(step)"
             @click.shift.stop="incrementKernelPixel(step * 10)">+</Button>
         </span>
-        <Label class="p-2">Position: ({{ props.posX }}, {{ props.posY }})</Label>
+        <Label class="flex justify-center w-full p-2">
+          <p>({{ props.posX }}, {{ props.posY }})</p>
+        </Label>
       </div>
-    </HoverCardContent>
-  </HoverCard>
+    </ContextMenuContent>
+  </ContextMenu>
 </template>
 
 <style scoped>

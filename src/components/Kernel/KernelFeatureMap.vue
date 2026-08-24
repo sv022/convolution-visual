@@ -5,6 +5,7 @@ import { computed } from 'vue';
 import KernelFeatureMapPixel from './KernelFeatureMapPixel.vue';
 import { LucideDot } from 'lucide-vue-next';
 import { useVisualsStore } from '@/stores/visuals';
+import FeatureMapPixel from './FeatureMapPixel.vue';
 
 const conv2dstore = useconv2dStore()
 const visualsStore = useVisualsStore()
@@ -23,17 +24,17 @@ const pixelSize = computed(() => {
 </script>
 <template>
   <div class="flex items-center space-x-2">
-    <div>
+    <div class="border">
       <div v-for="i in conv2dstore.kernel.height" v-bind:key="i" class="flex">
-          <KernelFeatureMapPixel v-for="j in conv2dstore.kernel.height" v-bind:key="i * conv2dstore.kernel.height + j"
+          <FeatureMapPixel v-for="j in conv2dstore.kernel.height" v-bind:key="i * conv2dstore.kernel.height + j"
             :value="visualsStore.framePixelValues[((j - 1) * conv2dstore.kernel.width) + (i - 1)]" :size="pixelSize" />
         </div>
     </div>
     <LucideDot />
-    <div>
+    <div class="border">
         <div v-for="i in conv2dstore.kernel.height" v-bind:key="i" class="flex">
           <KernelFeatureMapPixel v-for="j in conv2dstore.kernel.height" v-bind:key="i * conv2dstore.kernel.height + j"
-            :value="conv2dstore.kernel.pixels[((i - 1) * conv2dstore.kernel.width) + (j - 1)]" :size="pixelSize" />
+            :value="conv2dstore.kernel.pixels[((i - 1) * conv2dstore.kernel.width) + (j - 1)]" :size="pixelSize" :pos-x="i" :pos-y="j" />
         </div>
       </div>
   </div>

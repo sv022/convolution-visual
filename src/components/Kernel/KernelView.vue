@@ -71,7 +71,7 @@ const kernelSum = computed(() => {
   </div>
   <div class="flex flex-col items-center justify-center text-center space-y-2">
       <div class="font-bold text-2xl">=</div>
-      <div :class="cn('flex items-center justify-center', kernelPixelSize)"
+      <div :class="cn('flex items-center justify-center border', kernelPixelSize)"
         :style="{ backgroundColor: outputPixelBGColor, color: outputPixelTextColor }">
         {{ outputPixelValue }}
       </div>
