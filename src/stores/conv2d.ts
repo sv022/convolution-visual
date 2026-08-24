@@ -27,14 +27,6 @@ export const useconv2dStore = defineStore('conv2d', () => {
     input.value = imageformat(pixels, widthNew, heightNew, padding.value)
   }
 
-  function resetInput() {
-    input.value.pixels = Array.from({ length: 32 * 32 }, () => Math.random())
-    input.value.width = 8
-    input.value.height = 8
-    isExampleSelected.value = false
-    padding.value = 0
-  }
-
   const incrementInputSize = () => {
     input.value.height++
     input.value.width++
@@ -106,8 +98,6 @@ export const useconv2dStore = defineStore('conv2d', () => {
     imageformat(input.value.pixels, input.value.width, input.value.height, padding.value),
   )
 
-  resetInput()
-
   const output = computed(() => {
     return operation.value === 'convolution'
       ? convolve(input.value, kernel.value, padding.value, stride.value)
@@ -125,7 +115,6 @@ export const useconv2dStore = defineStore('conv2d', () => {
     isKernelSelected,
     output,
     setImage,
-    resetInput,
     incrementInputSize,
     decrementInputSize,
     incrementKernelSize,
