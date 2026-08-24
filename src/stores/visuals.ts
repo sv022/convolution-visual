@@ -8,7 +8,9 @@ export const useVisualsStore = defineStore('visuals', () => {
   const highlightPixel = ref<number[]>([])
   const framePixelValues = ref<number[]>(Array.from({ length: 3 * 3 }, () => 0))
   const kernelViewType = ref<'matrix' | 'features'>('matrix')
+
   const showPixelValues = ref<boolean>(true)
+  const showPixelBorders = ref<boolean>(false)
 
   function getHighlightFrame(
     w: number,
@@ -50,6 +52,7 @@ export const useVisualsStore = defineStore('visuals', () => {
     framePixelValues,
     kernelViewType,
     showPixelValues,
+    showPixelBorders,
     getHighlightFrame,
     clearHighlight,
     checkHighlight,

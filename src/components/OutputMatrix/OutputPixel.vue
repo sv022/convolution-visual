@@ -15,7 +15,7 @@ const visualsStore = useVisualsStore()
 
 <template>
   <div
-    :class="cn('flex justify-center items-center border', props.size, { 'border-red-500': props.highlight })"
+    :class="cn('flex items-center justify-center', props.size, { 'border border-red-500': props.highlight }, {'border' : visualsStore.showPixelBorders})"
     :style="{ backgroundColor: grayscaleToHex(props.value), color: invertGrayscaleToHex(props.value) }">
     <p v-if="visualsStore.showPixelValues">{{ props.value ? props.value.toFixed(2) : '0' }}</p>
   </div>

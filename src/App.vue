@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="h-dvh">
+  <div>
     <RouterView />
   </div>
 </template>
