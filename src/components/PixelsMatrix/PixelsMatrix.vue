@@ -50,7 +50,6 @@
     // w = Math.min(w, width.value - r - (conv2dStore.stride - 1) * 4)
     // h = Math.min(h, height.value - r - (conv2dStore.stride - 1) * 4)
 
-    visualsStore.channels = ['GS']
     visualsStore.getHighlightFrame(
       w,
       h,

@@ -8,7 +8,6 @@ const visualsStore = useVisualsStore()
 onMounted(() => {
   visualsStore.highlightFrame = [[]]
   visualsStore.highlightPixel = [0, 0]
-  visualsStore.channels = ['GS']
 })
 </script>
 
