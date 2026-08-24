@@ -23,7 +23,7 @@ const visualsStore = useVisualsStore()
 
   <div class="space-y-4">
       <h3 class="text-center text-3xl font-bold text-carbon">Input Settings</h3>
-      <NumberField id="padding" :default-value="0" :min="0" :max="5" :model-value="conv2dStore.padding">
+      <NumberField id="padding" :default-value="0" :min="0" :max="7" :model-value="conv2dStore.padding">
         <Label for="padding">Padding</Label>
         <NumberFieldContent>
           <NumberFieldDecrement @click="conv2dStore.decrementPadding()" />

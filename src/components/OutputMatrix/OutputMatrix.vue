@@ -29,7 +29,7 @@ const checkHighlightPixel = (i: number, j: number) => {
 </script>
 
 <template>
-  <div class="md:h-100">
+  <div>
     <div class="border">
       <div v-for="i in conv2dstore.output.height" v-bind:key="i" class="flex">
         <OutputPixel v-for="j in conv2dstore.output.height" v-bind:key="i * conv2dstore.output.height + j"
