@@ -22,6 +22,9 @@ export const useconv2dStore = defineStore('conv2d', () => {
   const stride = ref<number>(1)
   const isKernelSelected = ref<boolean>(false)
 
+  const userKernels = ref<Image[]>([])
+  const userKernelsNames = ref<string[]>([])
+
   function setImage(pixels: number[], widthNew: number, heightNew: number) {
     padding.value = 0
     input.value = imageformat(pixels, widthNew, heightNew, padding.value)
@@ -46,6 +49,12 @@ export const useconv2dStore = defineStore('conv2d', () => {
   const setKernel = (kernelType: Kernels) => {
     isKernelSelected.value = true
     kernel.value = getKernel(kernelType)
+  }
+
+  const setUserKernel = (name: string) => {
+    const index = userKernelsNames.value.indexOf(name)
+    kernel.value = userKernels.value[index]
+    isKernelSelected.value = true
   }
 
   const setOperation = (op: 'convolution' | 'correlation') => {
@@ -77,6 +86,25 @@ export const useconv2dStore = defineStore('conv2d', () => {
     isKernelSelected.value = false
   }
 
+  const saveKernel = (name: string) => {
+    userKernels.value.push({ ...kernel.value })
+    userKernelsNames.value.push(name)
+    localStorage.setItem(
+      'userKernels',
+      JSON.stringify({ userKernels: userKernels.value, userKernelsNames: userKernelsNames.value }),
+    )
+  }
+
+  const loadKernels = () => {
+    const storedKernels = localStorage.getItem('userKernels')
+    if (storedKernels) {
+      const { userKernels: parsedKernels, userKernelsNames: parsedNames } =
+        JSON.parse(storedKernels)
+      userKernelsNames.value = parsedNames
+      userKernels.value = parsedKernels
+    }
+  }
+
   function setImagePixel(i: number, j: number, value: number) {
     input.value.pixels[i * input.value.width + j] = value
   }
@@ -103,6 +131,8 @@ export const useconv2dStore = defineStore('conv2d', () => {
     stride,
     inputResult,
     isKernelSelected,
+    userKernels,
+    userKernelsNames,
     output,
     setImage,
     incrementKernelSize,
@@ -110,8 +140,11 @@ export const useconv2dStore = defineStore('conv2d', () => {
     incrementPadding,
     decrementPadding,
     setKernel,
+    setUserKernel,
     setOperation,
     resetKernel,
+    saveKernel,
+    loadKernels,
     setImagePixel,
     setKernelPixel,
   }

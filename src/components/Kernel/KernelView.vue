@@ -7,6 +7,7 @@ import invertGrayscaleToHex from '@/utils/invertGrayscale'
 import { cn } from '@/lib/utils.ts'
 import KernelMatrix from './KernelMatrix.vue'
 import KernelFeatureMap from './KernelFeatureMap.vue'
+import SaveKernelDialog from './SaveKernelDialog.vue'
 
 
 const conv2dstore = useconv2dStore()
@@ -58,7 +59,7 @@ const kernelSum = computed(() => {
 
 <template>
 
-<div class="space-y-2 translate-y-2 min-w-100">
+<div class="space-y-2 translate-y-4 min-w-100">
   <div class="text-center">
       Kernel sum:
       <mark class="bg-transparent font-bold text-emerald-800">{{
@@ -80,6 +81,7 @@ const kernelSum = computed(() => {
           At ({{ visualsStore.highlightPixel[0] || '-' }}, {{ visualsStore.highlightPixel[1] || '-' }})
         </p>
       </div>
+      <SaveKernelDialog />
     </div>
 </div>
 

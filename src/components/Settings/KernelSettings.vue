@@ -21,13 +21,14 @@ import { useVisualsStore } from '@/stores/visuals';
 import { Kernels } from '@/types/kernels';
 import { kernelNameMap } from '@/utils/kernelNames';
 import { ref } from 'vue';
+import { onMounted } from 'vue';
 import Button from '../ui/button/Button.vue';
-import { LucideGrid, LucideGrip } from 'lucide-vue-next';
+import { LucideCpu, LucideDices, LucideGrid, LucideGrip, LucideUser } from 'lucide-vue-next';
 
 const conv2dStore = useconv2dStore()
 const visualsStore = useVisualsStore()
 
-const selectedKernel = ref<Kernels | 'random'>('random')
+const selectedKernel = ref<Kernels | 'random' | string>('random')
 const operation = ref<'convolution' | 'correlation'>('correlation')
 
 function setKernel() {
@@ -36,7 +37,11 @@ function setKernel() {
     conv2dStore.resetKernel()
     return
   }
-  conv2dStore.setKernel(selectedKernel.value)
+  if (conv2dStore.userKernelsNames.includes(selectedKernel.value)){
+    conv2dStore.setUserKernel(selectedKernel.value)
+    return
+  }
+  conv2dStore.setKernel(selectedKernel.value as Kernels)
 }
 
 function setOperation() {
@@ -44,6 +49,9 @@ function setOperation() {
   conv2dStore.setOperation(operation.value)
 }
 
+onMounted(() => {
+  conv2dStore.loadKernels()
+})
 </script>
 
 <template>
@@ -79,11 +87,14 @@ function setOperation() {
             <SelectGroup>
               <SelectLabel class="font-semibold">Kernels</SelectLabel>
               <SelectItem value='random'>
-                Random
+                <LucideDices class="stroke-input" /> <p>Random</p>
+              </SelectItem>
+              <SelectItem v-for="userKernel in conv2dStore.userKernelsNames" :key="userKernel" :value="userKernel">
+                <LucideUser class="stroke-input" /> {{ userKernel }}
               </SelectItem>
               <SelectItem v-for="kernel in Object.values(Kernels)" :key="kernel.toString()" :value="kernel.valueOf()"
                 :class="kernel">
-                {{ kernelNameMap[kernel] }}
+                <LucideCpu class="stroke-input" /> {{ kernelNameMap[kernel] }}
               </SelectItem>
             </SelectGroup>
           </SelectContent>
