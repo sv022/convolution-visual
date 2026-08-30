@@ -87,8 +87,12 @@ export const useconv2dStore = defineStore('conv2d', () => {
   }
 
   const saveKernel = (name: string) => {
-    userKernels.value.push({ ...kernel.value })
-    userKernelsNames.value.push(name)
+    if (userKernelsNames.value.includes(name)) {
+      userKernels.value[userKernelsNames.value.indexOf(name)] = { ...kernel.value }
+    } else {
+      userKernels.value.push({ ...kernel.value })
+      userKernelsNames.value.push(name)
+    }
     localStorage.setItem(
       'userKernels',
       JSON.stringify({ userKernels: userKernels.value, userKernelsNames: userKernelsNames.value }),
