@@ -95,6 +95,16 @@ export const useconv2dStore = defineStore('conv2d', () => {
     )
   }
 
+  const deleteKernel = (name: string) => {
+    const index = userKernelsNames.value.indexOf(name)
+    userKernelsNames.value.splice(index, 1)
+    userKernels.value.splice(index, 1)
+    localStorage.setItem(
+      'userKernels',
+      JSON.stringify({ userKernels: userKernels.value, userKernelsNames: userKernelsNames.value }),
+    )
+  }
+
   const loadKernels = () => {
     const storedKernels = localStorage.getItem('userKernels')
     if (storedKernels) {
@@ -144,6 +154,7 @@ export const useconv2dStore = defineStore('conv2d', () => {
     setOperation,
     resetKernel,
     saveKernel,
+    deleteKernel,
     loadKernels,
     setImagePixel,
     setKernelPixel,
