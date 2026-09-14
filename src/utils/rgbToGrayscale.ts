@@ -1,4 +1,3 @@
-// Качественный перевод с учетом гамма-коррекции sRGB
 export default function rgbToGrayscale(rgbArray: Uint8Array): number[] {
   const grayscale = new Array(rgbArray.length / 3)
 
